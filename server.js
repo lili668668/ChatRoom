@@ -1,29 +1,34 @@
-var cc          = require('config-multipaas'),
-    restify     = require('restify'),
-    fs          = require('fs')
+var http = require('http');
+var express = require('express');
+var bodyparser = require('body-parser');
+var fs = require('fs');
 
-var config      = cc(),
-    app         = restify.createServer()
 
-app.use(restify.queryParser())
-app.use(restify.CORS())
-app.use(restify.fullResponse())
+var app = express();
+var server = http.createServer(app);
 
-// Routes
-app.get('/status', function (req, res, next)
-{
-  res.send("{status: 'ok'}");
+var content = fs.readFileSync('form.html');
+
+app.use( bodyparser.json() );
+app.use( bodyparser.urlencoded({
+    extended: true
+}) );
+
+app.get('/', function(request,response){
+    response.writeHeader(200,{'Content-Type':'text/html'});
+    response.write(content);
+    response.end();
 });
 
-app.get('/', function (req, res, next)
-{
-  var data = fs.readFileSync(__dirname + '/index.html');
-  res.status(200);
-  res.header('Content-Type', 'text/html');
-  res.end(data.toString().replace(/host:port/g, req.header('Host')));
+app.post('/',function(request,response){
+    var res = require('./basic-response.js');
+    var str = res.res(request.body.test);
+    response.writeHeader(200,{'Content-Type':'text/html'});
+    response.write(content);
+    response.write(str);
+    response.end();
+    
 });
-
-app.get(/\/(css|js|img)\/?.*/, restify.serveStatic({directory: './static/'}));
 
 app.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
