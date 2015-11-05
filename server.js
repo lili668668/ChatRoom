@@ -3,6 +3,7 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var fs = require('fs');
 var cc = require('config-multipaas');
+var xss = require('xss');
 
 var app = express();
 var server = http.createServer(app);
@@ -23,7 +24,7 @@ app.get('/', function(request,response){
 
 app.post('/',function(request,response){
     var res = require('./basic-response.js');
-    var str = res.res(request.body.test);
+    var str = xss(res.res(request.body.test));
     response.writeHeader(200,{'Content-Type':'text/html'});
     response.write(content);
     response.write(str);
