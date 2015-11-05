@@ -30,6 +30,6 @@ app.post('/',function(request,response){
     
 });
 
-app.listen(config.get('PORT'), config.get('IP'), function () {
+server.listen(config.get('PORT'), config.get('IP'), function () {
   console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
 });
