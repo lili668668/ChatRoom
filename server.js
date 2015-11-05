@@ -6,6 +6,7 @@ var cc = require('config-multipaas');
 
 var app = express();
 var server = http.createServer(app);
+var config = cc();
 
 var content = fs.readFileSync('form.html');
 
