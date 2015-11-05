@@ -2,7 +2,7 @@ var http = require('http');
 var express = require('express');
 var bodyparser = require('body-parser');
 var fs = require('fs');
-
+var cc = require('config-multipaas');
 
 var app = express();
 var server = http.createServer(app);
