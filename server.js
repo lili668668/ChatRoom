@@ -23,7 +23,7 @@ app.get('/', function(request,response){
 });
 
 app.post('/',function(request,response){
-    var res = require('./js/compbot.js');
+    var compbot = require('./js/compbot.js');
     var str = compbot.res(xss(request.body.test));
     response.writeHeader(200,{'Content-Type':'text/html'});
     response.write(content);
