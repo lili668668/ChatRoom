@@ -9,7 +9,7 @@ var app = express();
 var server = http.createServer(app);
 var config = cc();
 
-var content = fs.readFileSync('form.html');
+var content = fs.readFileSync('index.html');
 
 app.use( bodyparser.json() );
 app.use( bodyparser.urlencoded({
