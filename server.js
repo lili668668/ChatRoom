@@ -15,6 +15,7 @@ app.use( bodyparser.json() );
 app.use( bodyparser.urlencoded({
     extended: true
 }) );
+app.use('/css', express.static('css'));
 
 app.get('/', function(request,response){
     response.writeHeader(200,{'Content-Type':'text/html'});
@@ -29,9 +30,9 @@ app.post('/',function(request,response){
     response.write(content);
     response.write(str);
     response.end();
-    
+
 });
 
 server.listen(config.get('PORT'), config.get('IP'), function () {
-  console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
+    console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
 });
