@@ -4,6 +4,7 @@ var bodyparser = require('body-parser');
 var fs = require('fs');
 var cc = require('config-multipaas');
 var xss = require('xss');
+var $ = require('jquery');
 
 var app = express();
 var server = http.createServer(app);
@@ -28,8 +29,10 @@ app.post('/',function(request,response){
     var str = compbot.res(xss(request.body.talk));
     response.writeHeader(200,{'Content-Type':'text/html'});
     response.write(content);
-    response.write(str);
+    str = '<div class="text">' + str + '</div>';
+    //    response.write(str);
     response.end();
+    $("body").append(str);
 
 });
 
