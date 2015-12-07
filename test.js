@@ -23,10 +23,6 @@ io.on('connection', function(socket){
     });
 });
 
-server.listen(config.get('PORT'), config.get('IP'), function () {
-    console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT')  )
+server.listen("8080", "127.0.0.1", function () {
+    console.log( "Listening on " + "8080" + ", port " + "127.0.0.1"  );
 });
-
-/*server.listen("8080", "127.0.0.1", function () {*/
-    //console.log( "Listening on " + "8080" + ", port " + "127.0.0.1"  );
-/*});*/
