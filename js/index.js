@@ -18,3 +18,11 @@ socket.on('message', function(msg){
     );
 });
 
+socket.on('bot', function(msg){
+    $('#messages').append(
+        $('<div class="frame-left">').append(
+            $('<div class="text">').text(msg)
+        )
+    );
+});
+
