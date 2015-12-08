@@ -1,22 +1,23 @@
 var name = "";
-$('#naform').submit(function(){
+$('#nabu').click(function(){
     var n = $('#name').val();
     if (n !== '') {
         console.log(n);
         name = n;
-        $('#dark').css("display" , "none");
+        $('#dark').remove();
         chat();
         return false;
     } else {
         console.log(n);
         $('#warn').css("display" , "block");
+        return false;
     }
 });
 function chat() {
     var socket = io();
     $('#form').submit(function(){
         var m = $('#talk').val();
-        socket.emit('message', m);
+        socket.emit('message', n + " : " + m);
         $('#messages').append(
             $('<div class="frame-right">').append(
                 $('<div class="me">').text(m)
