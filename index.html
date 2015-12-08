@@ -5,10 +5,22 @@
         <link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
     </head>
     <body>
-        <div id="messages"></div>
-        <form action="" id="form">
-            <input id="talk" autocomplete="off" /><button id="submit">Send</button>
-        </form>
+        <div id="dark">
+            <div id="center">
+                <h1>Input your name</h1>
+                <form id="naform" action="">
+                    <input id="name" autocomplete="off" />
+                    <button id="nabu">Send</button>
+                </form>
+                <h1 style="display: none" id="warn">姓名不可為空</h1>
+            </div>
+        </div>
+        <div id="content">
+            <div id="messages"></div>
+            <form action="" id="form">
+                <input id="talk" autocomplete="off" /><button id="submit">Send</button>
+            </form>
+        </div>
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script src="js/index.js"></script>
