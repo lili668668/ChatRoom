@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>天竺鼠聊天室</title>
-        <link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="css/register.css" type="text/css" media="all" />
     </head>
     <body>
         <div id="dark">
             <div id="center">
                 <h1>Input your name</h1>
-                <form id="naform" action="POST">
-                    <input id="name" autocomplete="off" />
+                <form id="naform" action="/chat" method="POST">
+                    <input name="name" id="name" autocomplete="off" />
                     <button id="nabu">Send</button>
                 </form>
                 <h1 style="display: none" id="warn">姓名不可為空</h1>
@@ -17,7 +17,6 @@
         </div>
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-        <script src="js/index.js"></script>
 
     </body>
 </html>
