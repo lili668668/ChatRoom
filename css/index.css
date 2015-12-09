@@ -52,42 +52,6 @@ html, body {
     text-align: left;
 }
 
-#dark {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background-color: black;
-    z-index: 100;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#center {
-    position: absolute;
-    width: 100%;
-    vertical-align: middle;
-    top: 40%;
-    color: white;
-}
-
-#name {
-    border-style: none none solid none;
-    background-color: black;
-    color: white;
-    text-align: center;
-}
-
-#nabu {
-    min-height: 50px;
-    min-width: 80px;
-    font-size: x-large;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-}
-
 #content {
     position: absolute;
     top: 0;

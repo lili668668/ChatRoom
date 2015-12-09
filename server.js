@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require('express');
 var socketio = require('socket.io');
+var bodyparser = require('body-parser');
 var cc = require('config-multipaas');
 
 var compbot = require('./js/compbot.js');
@@ -13,7 +14,20 @@ var config = cc();
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
 
+app.use( bodyparser.json() );
+app.use( bodyparser.urlencoded({
+        extended: true
+}) );
+
 app.get('/', function(request,response){
+    if () {
+        response.sendFile(__dirname + "/register.html");
+    } else {
+        response.sendFile(__dirname + "/index.html");
+    }
+});
+
+app.post('/chat', function(request,response){
     response.sendFile(__dirname + "/index.html");
 });
 
@@ -22,6 +36,7 @@ io.on('connection', function(socket){
         socket.broadcast.emit('message', msg);
         io.emit('bot', compbot.res(msg));
     });
+
 });
 
 server.listen(config.get('PORT'), config.get('IP'), function () {
