@@ -19,8 +19,13 @@ app.get('/', function(request,response){
 
 io.on('connection', function(socket){
     socket.on('message', function(msg){
-        io.emit('message', compbot.res(msg));
+        socket.broadcast.emit('message', msg);
+        io.emit('bot', compbot.res(msg));
     });
+});
+
+server.listen(config.get('PORT'), config.get('IP'), function () {
+    console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT')  )
 });
 
 server.listen("8080", "127.0.0.1", function () {
