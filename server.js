@@ -11,33 +11,60 @@ var server = http.createServer(app);
 var io = socketio(server);
 var config = cc();
 
+var people_counter = 0;
+
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
 
 app.use( bodyparser.json() );
 app.use( bodyparser.urlencoded({
-        extended: true
+    extended: true
 }) );
 
 app.get('/', function(request,response){
-    if () {
-        response.sendFile(__dirname + "/register.html");
-    } else {
-        response.sendFile(__dirname + "/index.html");
-    }
+    response.sendFile(__dirname + "/register.html");
 });
 
 app.post('/chat', function(request,response){
-    response.sendFile(__dirname + "/index.html");
+    if (request.body.name === '' || request.body.name === undefined) {
+        response.sendFile(__dirname + "/register.html");
+        return false;
+    } else {
+        people_counter = people_counter + 1;
+        console.log("up");
+
+        response.sendFile(__dirname + "/index.html");
+		io.on('connection', function(socket){
+			var name = request.body.name;
+			socket.emit('name', name);
+			io.emit('info', name + "上線，目前線上" + people_counter + "人");
+
+			socket.on('message', function(msg){
+				socket.broadcast.emit('message', msg.name + " : " + msg.msg);
+				if (people_counter === 1) {
+					io.emit('bot', compbot.res(msg.msg));
+				}
+			});	
+			
+			socket.on('disconnect', function(){
+				people_counter = people_counter - 1;
+				console.log("down");
+				io.emit('info', name + "下線，目前線上" + people_counter + "人");
+			});
+		});
+    }
 });
 
-io.on('connection', function(socket){
-    socket.on('message', function(msg){
-        socket.broadcast.emit('message', msg);
-        io.emit('bot', compbot.res(msg));
-    });
-
-});
+/*app.get('/chat', function(request, response){
+	io.on('connection', function(socket){
+		socket.on('message', function(msg){
+			socket.broadcast.emit('message', msg.name + " : " + msg.msg);
+			if (people_counter === 1) {
+				io.emit('bot', compbot.res(msg.msg));
+			}
+		});	
+	});
+} );*/
 
 server.listen(config.get('PORT'), config.get('IP'), function () {
     console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT')  )
