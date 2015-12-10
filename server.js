@@ -34,18 +34,16 @@ app.get('/chat', function(request,response){
         people_counter = people_counter + 1;
         console.log("up");
         name = request.query.name;
-
         response.sendFile(__dirname + "/index.html");
         return true;
-
     }
 });
+
 io.on('connection', function(socket){
     socket.on('message', function(msg){
         socket.broadcast.emit('message', msg.name + " : " + msg.msg);
         if (people_counter === 1) {
             io.emit('bot', compbot.res(msg.msg));
-            return false;
         }
     });	
 
@@ -54,12 +52,11 @@ io.on('connection', function(socket){
         console.log("down");
         io.emit('info', name + "下線，目前線上" + people_counter + "人");
     });
+
     socket.emit('name', name);
     io.emit('info', name + "上線，目前線上" + people_counter + "人");
 
 });
-
-
 
 server.listen(config.get('PORT'), config.get('IP'), function () {
     console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT')  )
