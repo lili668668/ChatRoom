@@ -1,6 +1,6 @@
 var name = "";
 var socket = io();
-$('form').submit(function(){
+$('#sub').onClick(function(){
 	var m = $('#talk').val();
 	socket.emit('message', {name:n, msg:m});
 	$('#messages').append(
@@ -9,7 +9,6 @@ $('form').submit(function(){
 		)
 	);
 	$('#talk').val('');
-	return false;
 });
 
 socket.on('name', function(msg){

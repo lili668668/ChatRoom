@@ -12,6 +12,7 @@ var io = socketio(server);
 var config = cc();
 
 var people_counter = 0;
+var name;
 
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
@@ -32,28 +33,47 @@ app.post('/chat', function(request,response){
     } else {
         people_counter = people_counter + 1;
         console.log("up");
+		name = request.body.name;
 
         response.sendFile(__dirname + "/index.html");
-		io.on('connection', function(socket){
-			var name = request.body.name;
-			socket.emit('name', name);
-			io.emit('info', name + "上線，目前線上" + people_counter + "人");
-
-			socket.on('message', function(msg){
-				socket.broadcast.emit('message', msg.name + " : " + msg.msg);
-				if (people_counter === 1) {
-					io.emit('bot', compbot.res(msg.msg));
-				}
-			});	
-			
-			socket.on('disconnect', function(){
-				people_counter = people_counter - 1;
-				console.log("down");
-				io.emit('info', name + "下線，目前線上" + people_counter + "人");
-			});
-		});
     }
 });
+
+io.on('connection', function(socket){
+	socket.emit('name', name);
+	io.emit('info', name + "上線，目前線上" + people_counter + "人");
+
+	socket.on('message', function(msg){
+		socket.broadcast.emit('message', msg.name + " : " + msg.msg);
+		if (people_counter === 1) {
+			io.emit('bot', compbot.res(msg.msg));
+		}
+	});	
+	
+	socket.on('disconnect', function(){
+		people_counter = people_counter - 1;
+		console.log("down");
+		io.emit('info', name + "下線，目前線上" + people_counter + "人");
+	});
+});
+
+/*io.on('connection', function(socket){
+	socket.emit('name', name);
+	io.emit('info', name + "上線，目前線上" + people_counter + "人");
+
+	socket.on('message', function(msg){
+		socket.broadcast.emit('message', msg.name + " : " + msg.msg);
+		if (people_counter === 1) {
+			io.emit('bot', compbot.res(msg.msg));
+		}
+	});	
+	
+	socket.on('disconnect', function(){
+		people_counter = people_counter - 1;
+		console.log("down");
+		io.emit('info', name + "下線，目前線上" + people_counter + "人");
+	});
+});*/
 
 /*app.get('/chat', function(request, response){
 	io.on('connection', function(socket){
