@@ -40,6 +40,8 @@ app.get('/chat', function(request,response){
 });
 
 io.on('connection', function(socket){
+    var allClient = [];
+    var allName = [];
     socket.on('message', function(msg){
         socket.broadcast.emit('message', msg.name + " : " + msg.msg);
         if (people_counter === 1) {
@@ -49,11 +51,15 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         people_counter = people_counter - 1;
+        var i = allClient.indexOf(socket);
+        allClient.splice(i ,1);
         console.log("down");
-        io.emit('info', name + "下線，目前線上" + people_counter + "人");
+        io.emit('info', allName.splice(i ,1) + "下線，目前線上" + people_counter + "人");
     });
 
     socket.emit('name', name);
+    allClient.push(socket);
+    allName.push(name);
     io.emit('info', name + "上線，目前線上" + people_counter + "人");
 
 });
