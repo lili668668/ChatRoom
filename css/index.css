@@ -19,7 +19,7 @@ html, body {
     resize: none;
 }
 
-#sub {
+#submit {
 	display: inline-block;
     position: relative;
 	left: 5%;

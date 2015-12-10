@@ -5,11 +5,13 @@
         <link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
     </head>
     <body>
-		<div id="content">
-			<div id="messages"></div>
-			<input id="talk" autocomplete="off" /><button id="sub">Send</button>
-		</div>
-		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+       <div id="content">
+            <div id="messages"></div>
+            <form id="form" action="">
+                <input id="talk" autocomplete="off" /><button id="submit">Send</button>
+             </form>
+       </div>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script src="js/index.js"></script>
     </body>
