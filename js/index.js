@@ -2,13 +2,15 @@ var name = "";
 var socket = io();
 $('form').submit(function(){
     var m = $('#talk').val();
-    socket.emit('message', {name:name, msg:m});
-    $('#messages').append(
-        $('<div class="frame-right">').append(
-            $('<div class="me">').text(m)
-        )
-    );
-    $('#talk').val('');
+    if (m !== '' && m !== undefined) {
+        socket.emit('message', {name:name, msg:m});
+        $('#messages').append(
+            $('<div class="frame-right">').append(
+                $('<div class="me">').text(m)
+            )
+        );
+        $('#talk').val('');
+    }
     return false;
 });
 
