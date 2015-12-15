@@ -16,6 +16,7 @@ var name;
 
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
+app.use('/img', express.static('img'));
 
 app.use( bodyparser.json() );
 app.use( bodyparser.urlencoded({
