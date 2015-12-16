@@ -45,8 +45,9 @@ io.on('connection', function(socket){
     var allName = [];
     socket.on('message', function(msg){
         socket.broadcast.emit('message', msg.name + " : " + msg.msg);
-        if (people_counter === 1) {
-            io.emit('bot', "蒽蒽：" + compbot.res(msg.msg));
+        var bot = compbot.res(msg.msg);
+        if (bot) {
+            io.emit('bot', "蒽蒽：" + bot);
         }
     });	
 
