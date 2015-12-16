@@ -36,6 +36,12 @@ html, body {
 	margin-right: 20px;
 }
 
+#messages {
+    height: 90%;
+    margin: auto 0;
+    overflow-y: scroll;
+}
+
 #for {
 	position: fixed;
 	bottom: 0%;

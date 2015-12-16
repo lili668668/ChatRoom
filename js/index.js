@@ -10,19 +10,27 @@ $('form').submit(function(){
             )
         );
         $('#talk').val('');
+        bottom();
     }
     return false;
 });
 
+function bottom() {
+    var d = document.getElementById('messages');
+    d.scrollTop = d.scrollHeight;
+}
+
 socket.on('name', function(msg){
     name = msg;
     $('#name').val(msg);
+    bottom();
 });
 
 socket.on('info', function(msg){
     $('#messages').append(
         $('<div class="info">').text(msg)
     );
+    bottom();
 });
 
 socket.on('message', function(msg){
@@ -31,6 +39,7 @@ socket.on('message', function(msg){
             $('<div class="text">').text(msg)
         )
     );
+    bottom();
 });
 
 socket.on('bot', function(msg){
@@ -39,4 +48,5 @@ socket.on('bot', function(msg){
             $('<div class="text">').text(msg)
         )
     );
+    bottom();
 });
