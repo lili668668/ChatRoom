@@ -8,6 +8,6 @@ exports.res = function(str) {
         var temp = dict[str2];
         return temp[rand.integer(0,temp.length-1)];
     } else {
-        return str;
+        return undefined;
     }
 };
