@@ -1,22 +1,21 @@
 {
-  "name": "OpenShift-Nodejs-Cartridge",
+  "name": "ChatRoom",
   "version": "1.1.0",
   "description": "Node.js Cartridge for OpenShift",
   "keywords": [
-    "OpenShift",
+    "Chat Room",
     "Node.js",
     "application",
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ryanj@redhat.com",
-    "url": "http://openshift.redhat.com/"
+    "name": "ballfish",
+    "email": "lili668668@gmail.com",
+    "url": "https://lili668668.github.io"
   },
-  "homepage": "http://openshift.redhat.com/",
   "repository": {
     "type": "git",
-    "url": "https://gitub.com/openshift/nodejs-custom-version-openshift.git"
+    "url": "http://github.com/lili668668/ChatRoom"
   },
   "engines": {
     "node": ">= 0.12.0",
